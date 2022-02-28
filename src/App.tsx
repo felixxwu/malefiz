@@ -18,6 +18,7 @@ function App() {
 
     return (
         <div>
+            firebase CI
             <Display />
             <Button />
         </div>
