@@ -9,10 +9,17 @@ function Button() {
     }
 
     return (
-        <button onClick={handleSet}>
+        <button onClick={handleSet} style={style()}>
             increase
         </button>
     )
+
+    function style(): React.CSSProperties {
+        return {
+            padding: count,
+            transition: '1s'
+        }
+    }
 }
 
 export default Button
