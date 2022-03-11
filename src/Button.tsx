@@ -3,15 +3,16 @@ import { useStore } from "./store"
 function Button() {
     const store = useStore()
 
-    function handleSet() {
-        store.count += 1
-        // store.double()
-    }
-
     return (
-        <button onClick={handleSet} style={style()}>
-            increase
-        </button>
+        <>
+            <button onClick={() => store.count += 1} style={style()}>
+                increase
+            </button>
+            <br></br>
+            <button onClick={() => store.double()} style={style()}>
+                double
+            </button>
+        </>
     )
 
     function style(): React.CSSProperties {
