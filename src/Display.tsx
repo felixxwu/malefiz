@@ -1,11 +1,11 @@
-import { useGetter } from "./store"
+import { useStore } from "./store"
 
 function Display() {
-    const count = useGetter('count')
+    const store = useStore()
 
     return (
         <div>
-            Count: {count}
+            Count: {store.count}
         </div>
     )
 }

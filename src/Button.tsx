@@ -1,11 +1,11 @@
-import { useGetter, useSetter } from "./store"
+import { useStore } from "./store"
 
 function Button() {
-    const set = useSetter()
-    const count = useGetter('count')
+    const store = useStore()
 
     function handleSet() {
-        set('count', count + 1)
+        store.count += 1
+        // store.double()
     }
 
     return (
@@ -16,7 +16,7 @@ function Button() {
 
     function style(): React.CSSProperties {
         return {
-            padding: count,
+            padding: store.count,
             transition: '1s'
         }
     }

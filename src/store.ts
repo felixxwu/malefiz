@@ -2,17 +2,14 @@ import create from "zustand";
 
 const config = {
     username: 'likhi',
-    count: 0,
+    count: 1,
     pagenumber: 0,
 }
 
 const actions = (set: ZustandSetter) => {
     return {
-        increment() {
-            set(state => ({count: state.count + 1}))
-        },
-        decrement() {
-            set(state => ({count: state.count - 1}))
+        double() {
+            set(state => ({count: state.count * 2}))
         },
         setStoreValue: <T extends ConfigKey>(name: T, value: typeof config[T]) => {
             set(() => <{[key in T]: typeof config[T]}>({[name]: value}))
@@ -20,7 +17,37 @@ const actions = (set: ZustandSetter) => {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+
+export function useStore() {
+
+    // use all hooks from the store and save them in an object
+    const hooks: any = {}
+    const storeKeys = <(keyof Store)[]>Object.keys(config).concat(actionKeys)
+    for (const key of storeKeys) {
+        hooks[key] = store(state => state[key])
+    }
+
+    // expose saved hooks as a proxy object
+    return new Proxy<Store>(hooks, {
+        // get the reactive hook value
+        get(hook, key: ConfigKey) {
+            return hook[key]
+        },
+        // set the store value using the setStoreValue hook
+        set(_, key: ConfigKey, value) {
+            hooks.setStoreValue(key, value)
+            return true
+        }
+    })
+}
+
+// store = config + actions
 type Store = typeof config & ReturnType<typeof actions>
+const store = create<Store>(set => ({
+    ...config,
+    ...actions(set as ZustandSetter)
+}))
 
 // union of all store keys
 type ConfigKey = keyof typeof config
@@ -30,15 +57,5 @@ type ZustandSetter = <T extends ConfigKey>(
     setter: (state: typeof config) => {[key in T]: typeof config[T]}
 ) => void
 
-const store = create<Store>(set => ({
-    ...config,
-    ...actions(set as ZustandSetter)
-}))
-
-export const useGetter = <T extends keyof Store>(key: T) => {
-    return store(state => state[key]) as Store[T]
-}
-
-export const useSetter = () => {
-    return store(state => state.setStoreValue)
-}
+// array of all action keys
+const actionKeys = Object.keys(actions(undefined as any))
