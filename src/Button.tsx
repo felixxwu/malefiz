@@ -6,11 +6,11 @@ function Button() {
     return (
         <>
             <button onClick={() => store.count += 1} style={style()}>
-                increase
+                increase count
             </button>
             <br></br>
-            <button onClick={() => store.double()} style={style()}>
-                double
+            <button onClick={() => store.page += 1} style={style()}>
+                increase page
             </button>
         </>
     )

@@ -1,12 +1,10 @@
 import { defineStore } from "minimal-react-state";
 
-const config = {
+export const useStore = defineStore({
     username: 'likhi',
     count: 0,
-    pagenumber: 0,
+    page: 0,
     double() {
         this.count *= 2
     }
-}
-
-export const useStore = defineStore<typeof config>(config)
+})

@@ -1,8 +1,9 @@
 import Button from "./Button"
-import Display from "./Display"
+import DisplayCount from "./DisplayCount"
 import { doc, setDoc } from "firebase/firestore"; 
 import { useEffect } from "react";
 import { getFirestore } from "firebase/firestore"
+import DisplayPage from "./DisplayPage";
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
     return (
         <div>
             firebase CI
-            <Display />
+            <DisplayCount />
+            <DisplayPage />
             <Button />
         </div>
     )
