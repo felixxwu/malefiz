@@ -1,4 +1,5 @@
 import { useStore } from "./store"
+import React from "react";
 
 function Button() {
     const store = useStore()
@@ -8,7 +9,7 @@ function Button() {
             <button onClick={() => store.count += 1} style={style()}>
                 increase count
             </button>
-            <br></br>
+            <br/>
             <button onClick={() => store.page += 1} style={style()}>
                 increase page
             </button>
