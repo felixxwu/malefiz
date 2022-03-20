@@ -1,28 +1,21 @@
-import Button from "./Button"
-import DisplayCount from "./DisplayCount"
-import { doc, setDoc } from "firebase/firestore"; 
-import { useEffect } from "react";
-import { getFirestore } from "firebase/firestore"
-import DisplayPage from "./DisplayPage";
+import Display from "./Display"
+import {initUser, isUserLoaded} from "./user-manager";
+import {useStore} from "./store";
+import React from "react";
 
 function App() {
 
-    useEffect(() => {
-        const db = getFirestore()
-        setDoc(doc(db, "cities", "LA"), {
-            name: "Los Angeles",
-            state: "CA",
-            country: "USA",
-            date: (new Date()).getTime()
-          })
-    }, [])
+    const store = useStore()
+
+    initUser()
+
+    if (!isUserLoaded(store)) return (
+        <div>Loading user...</div>
+    )
 
     return (
         <div>
-            firebase CI
-            <DisplayCount />
-            <DisplayPage />
-            <Button />
+            <Display />
         </div>
     )
 }
