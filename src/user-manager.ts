@@ -26,7 +26,7 @@ export function initUser() {
 function createNewUserData(): User {
     const now = (new Date()).getTime()
     return {
-        name: chance.word(),
+        name: chance.word({capitalize: true}),
         created: now,
         lastSeen: now,
     }
