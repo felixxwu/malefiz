@@ -14,6 +14,8 @@ function Display() {
             User ID: {store.userId}
             <br/>
             Username: <input type="text" value={store.userName} onInput={handleInput} />
+            <br/>
+            App width: {store.appWidth} | App height: {store.appHeight}
         </div>
     )
 

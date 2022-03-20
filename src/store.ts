@@ -1,6 +1,8 @@
 import { defineStore } from "minimal-react-state";
 
 const config = {
+    appWidth: window.innerWidth,
+    appHeight: window.innerHeight,
     userId: '',
     userName: '',
 }
