@@ -1,5 +1,5 @@
-import { useStore } from "./store"
-import {updateUsername} from "./user-manager";
+import { useStore } from "../utils/store"
+import {updateUsername} from "../db/user-manager";
 import React from "react";
 
 function Display() {

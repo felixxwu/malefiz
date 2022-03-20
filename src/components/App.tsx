@@ -1,8 +1,8 @@
 import Display from "./Display"
-import {initUser, isUserLoaded} from "./user-manager";
-import {useStore} from "./store";
+import {initUser, isUserLoaded} from "../db/user-manager";
+import {useStore} from "../utils/store";
 import React, {useEffect} from "react";
-import logo from './logo.svg'
+import logo from '../images/logo.svg'
 
 function App() {
     const store = useStore()

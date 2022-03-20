@@ -1,8 +1,8 @@
-import {useStore, storeType} from "./store";
+import {useStore, storeType} from "../utils/store";
 import {useEffect} from "react";
 import {addDoc, collection, doc, getFirestore, updateDoc, getDoc} from "firebase/firestore";
-import {consts} from "./costs";
-import {User} from "./types";
+import {consts} from "../utils/costs";
+import {User} from "../utils/types";
 import Chance from 'chance'
 import {debounce} from "throttle-debounce";
 

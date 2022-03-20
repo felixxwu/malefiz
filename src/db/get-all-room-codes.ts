@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 export async function getAllRoomCodes() {
     const db = getFirestore()
