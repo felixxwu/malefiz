@@ -7,21 +7,70 @@ function Home() {
     const store = useStore()
 
     return (
-        <div style={app()}>
-            <img src={logo} width="150" alt="Logo" />
-            <Display />
+        <div style={home()}>
+            <div style={title()}>
+                <img src={logo} width="80" alt="Logo" /> 
+                Malefiz
+            </div>
+            <div style={joinRoom()}>
+                <input style={joinRoomTextBox()}></input>
+                <button>Join Room</button>
+                <button>Create Room</button>
+            </div>
             <button onClick={() => store.appState = 'game'}>Go to game</button>
         </div>
     )
 
-    function app(): React.CSSProperties {
+    function home(): React.CSSProperties {
         return {
             width: store.appWidth,
             height: store.appHeight,
-            display: 'flex',
-            flexDirection: 'column',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gridTemplateRows: '0.8fr 1.2fr',
+            gap: '20px 0px',
+            gridAutoFlow: 'row',
+            gridTemplateAreas:"'title title' 'joinRoom avatar'"
+        }
+    }
+
+    function title(): React.CSSProperties {
+        return {
+            gridArea: 'title',
+            display: 'grid',
+            justifySelf: 'center',
+            alignSelf: 'end',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyItems: 'center',
+            fontFamily: 'Lexend Deca',
+            fontSize: 'x-large',
+        }
+    }
+
+    function joinRoom(): React.CSSProperties {
+        return {
+            gridArea: 'joinRoom', 
+            display: 'grid',
+            justifySelf: 'center',
+            alignSelf: 'start',
+        }
+    }
+
+    function joinRoomTextBox(): React.CSSProperties {
+        return {
+            display: 'block',
+            margin: '2em auto',
+            border: 'none',
+            padding: 0,
+            width: '6ch',
+            background: `repeating-linear-gradient(90deg, 
+                dimgrey 0, dimgrey 1ch, 
+                transparent 0, transparent 1.5ch) 
+                0 100%/ 5.5ch 2px no-repeat`,
+            font: '3ch droid sans mono, consolas, monospace',
+            letterSpacing: '0.5ch',
+            outline: 'none',
+            textTransform: 'uppercase'
         }
     }
 }
