@@ -1,8 +1,8 @@
-import Display from "./Display"
 import {initUser, isUserLoaded} from "../db/user-manager";
 import {useStore} from "../utils/store";
 import React, {useEffect} from "react";
-import logo from '../images/logo.svg'
+import Home from "./Home";
+import Game from "./Game";
 
 function App() {
     const store = useStore()
@@ -22,22 +22,9 @@ function App() {
         <div>Loading user...</div>
     )
 
-    return (
-        <div style={app()}>
-            <img src={logo} width="150" alt="Logo" />
-            <Display />
-        </div>
-    )
-
-    function app(): React.CSSProperties {
-        return {
-            width: store.appWidth,
-            height: store.appHeight,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-        }
+    switch (store.appState) {
+        case 'game': return <Game />
+        case 'home': return <Home />
     }
 }
 
