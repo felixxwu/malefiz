@@ -6,8 +6,14 @@ export interface User {
 
 export type AppState = 'home' | 'game'
 
+export type Id = number
+
 export interface Map {
-    [id: number]: Point
+    width: number,
+    height: number,
+    points: {
+        [id: Id]: Point,
+    },
 }
 
 export interface Point {
@@ -16,5 +22,5 @@ export interface Point {
         x: number,
         y: number,
     },
-    neighbours: number[],
+    neighbours: Id[],
 }
