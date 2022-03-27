@@ -13,7 +13,7 @@ function Home() {
                 Malefiz
             </div>
             <div style={joinRoom()}>
-                <input style={joinRoomTextBox()}></input>
+                <input type='text' maxLength={4} style={joinRoomTextBox()}></input>
                 <button>Join Room</button>
                 <button>Create Room</button>
             </div>
@@ -70,8 +70,7 @@ function Home() {
             font: '3ch droid sans mono, consolas, monospace',
             letterSpacing: '0.5ch',
             outline: 'none',
-            textTransform: 'uppercase'
-        }
+            textTransform: 'uppercase'        }
     }
 }
 
