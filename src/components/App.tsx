@@ -18,14 +18,26 @@ function App() {
         resize()
     }, [])
 
-    if (!isUserLoaded(store)) return (
-        <div>Loading user...</div>
-    )
+    return <div style={app()}>
+        {(() => {
+            if (!isUserLoaded(store)) return (
+                <div>Loading user...</div>
+            )
 
-    switch (store.appState) {
-        case 'game': return <Game />
-        case 'home': return <Home />
+            switch (store.appState) {
+                case 'game': return <Game />
+                case 'home': return <Home />
+            }
+        })()}
+    </div>
+
+    function app(): React.CSSProperties {
+        return {
+            width: store.appWidth,
+            height: store.appHeight,
+        }
     }
+
 }
 
 export default App

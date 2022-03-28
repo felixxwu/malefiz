@@ -1,4 +1,3 @@
-import Display from "./Display"
 import {useStore} from "../utils/store";
 import React from "react";
 import logo from '../images/logo.svg'
@@ -13,7 +12,7 @@ function Home() {
                 Malefiz
             </div>
             <div style={joinRoom()}>
-                <input type='text' maxLength={4} style={joinRoomTextBox()}></input>
+                <input type='text' maxLength={4} style={joinRoomTextBox()} />
                 <button>Join Room</button>
                 <button>Create Room</button>
             </div>
@@ -23,8 +22,8 @@ function Home() {
 
     function home(): React.CSSProperties {
         return {
-            width: store.appWidth,
-            height: store.appHeight,
+            width: '100%',
+            height: '100%',
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gridTemplateRows: '0.8fr 1.2fr',
@@ -70,7 +69,8 @@ function Home() {
             font: '3ch droid sans mono, consolas, monospace',
             letterSpacing: '0.5ch',
             outline: 'none',
-            textTransform: 'uppercase'        }
+            textTransform: 'uppercase'
+        }
     }
 }
 
