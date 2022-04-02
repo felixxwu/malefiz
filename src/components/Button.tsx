@@ -1,6 +1,6 @@
 import {useStore} from "../utils/store";
 import styled from 'styled-components'
-import {consts} from '../utils/costs'
+import {consts} from '../utils/consts'
 
 interface ButtonProps {
     onClick: () => void
