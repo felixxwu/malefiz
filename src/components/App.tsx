@@ -3,6 +3,7 @@ import {useStore} from "../utils/store";
 import React, {useEffect} from "react";
 import Home from "./Home";
 import Game from "./Game";
+import {cancelPointerEvent, onPointerDown, onPointerMove, onPointerUp} from "./Pieces";
 
 function App() {
     const store = useStore()
@@ -18,10 +19,21 @@ function App() {
         resize()
     }, [])
 
-    return <div style={app()}>
+    return <div
+        style={app()}
+        onPointerDown={e => onPointerDown(e)}
+        onPointerMove={e => onPointerMove(e)}
+        onPointerUp={e => onPointerUp(e, store)}
+        onPointerCancel={() => cancelPointerEvent(store)}
+        onPointerLeave={() => cancelPointerEvent(store)}
+    >
         {(() => {
+            if (store.connectionError !== '') return (
+                <div>Could not connect to the server. {store.connectionError}</div>
+            )
+
             if (!isUserLoaded(store)) return (
-                <div>Loading user...</div>
+                <div>Loading...</div>
             )
 
             switch (store.appState) {
@@ -35,6 +47,9 @@ function App() {
         return {
             width: store.appWidth,
             height: store.appHeight,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
         }
     }
 

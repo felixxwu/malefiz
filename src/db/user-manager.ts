@@ -1,7 +1,7 @@
 import {useStore, storeType} from "../utils/store";
 import {useEffect} from "react";
 import {addDoc, collection, doc, getFirestore, updateDoc, getDoc} from "firebase/firestore";
-import {consts} from "../utils/costs";
+import {consts} from "../utils/consts";
 import {User} from "../utils/types";
 import Chance from 'chance'
 import {debounce} from "throttle-debounce";
@@ -14,11 +14,15 @@ export function initUser() {
 
     useEffect(() => {
         (async () => {
-            // userData will always be a valid user, whether it's an existing one or not
-            const userData = await getUserDataFromDb() ?? createNewUserData()
+            try {
+                // userData will always be a valid user, whether it's an existing one or not
+                const userData = await getUserDataFromDb() ?? createNewUserData()
 
-            // localStorageUserId can be null here, in which case a new user will be created
-            await createOrUpdateUser(userData, store)
+                // localStorageUserId can be null here, in which case a new user will be created
+                await createOrUpdateUser(userData, store)
+            } catch (e) {
+                store.connectionError = `${e}`
+            }
         })()
     }, [])
 }

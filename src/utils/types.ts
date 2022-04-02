@@ -24,3 +24,9 @@ export interface Point {
     },
     neighbours: Id[],
 }
+
+export interface Piece {
+    id: number,
+    x: number,
+    y: number,
+}

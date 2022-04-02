@@ -7,7 +7,7 @@ export const map1: Map = {
         0: {
             type: "end",
             pos: { x: 1, y: 1 },
-            neighbours: [1],
+            neighbours: [1, 2],
         },
         1: {
             type: "mid",
@@ -16,7 +16,7 @@ export const map1: Map = {
         },
         2: {
             type: "mid",
-            pos: { x: 3, y: 1 },
+            pos: { x: 3, y: 0.5 },
             neighbours: [1, 3],
         },
         3: {
