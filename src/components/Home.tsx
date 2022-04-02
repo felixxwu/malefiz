@@ -1,6 +1,7 @@
 import {useStore} from "../utils/store";
 import React from "react";
 import logo from '../images/logo.svg'
+import Button from "./Button";
 
 function Home() {
     const store = useStore()
@@ -13,13 +14,15 @@ function Home() {
             </div>
             <div style={joinRoom()}>
                 <input type='text' maxLength={4} style={joinRoomTextBox()} />
-                <button>Join Room</button>
-                <button>Create Room</button>
+                <Button onClick={() => console.log('Join room')} text='Join Room'></Button>
+                <Button onClick={() => console.log('Create room')} text='Create Room'></Button>
             </div>
-            <button onClick={() => store.appState = 'game'}>Go to game</button>
+            <div style={avatar()}>
+                <Button onClick={() => store.appState = 'game'} text='Go to game'></Button>
+            </div>
         </div>
     )
-
+    
     function home(): React.CSSProperties {
         return {
             width: '100%',
@@ -52,13 +55,25 @@ function Home() {
             display: 'grid',
             justifySelf: 'center',
             alignSelf: 'start',
+            gap: '15px'
+        }
+    }
+
+    function avatar(): React.CSSProperties {
+        return {
+            gridArea: 'avatar', 
+            display: 'grid',
+            justifySelf: 'center',
+            alignSelf: 'start',
+            gap: '15px',
+            marginTop: '20px' // Delete when grid area replaced with avatar contents
         }
     }
 
     function joinRoomTextBox(): React.CSSProperties {
         return {
             display: 'block',
-            margin: '2em auto',
+            margin: 'auto',
             border: 'none',
             padding: 0,
             width: '6ch',
