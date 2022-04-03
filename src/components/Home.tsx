@@ -1,10 +1,17 @@
-import {useStore} from "../utils/store";
-import React from "react";
+import {useStore} from '../utils/store';
+import React from 'react';
 import logo from '../images/logo.svg'
-import Button from "./Button";
+import Button from './Button';
+import {generateCode} from '../db/generate-room-code'
+import { async } from '@firebase/util';
 
 function Home() {
     const store = useStore()
+
+    const handleCreateRoom= async() => {
+        store.roomCode = store.roomCode? store.roomCode: await generateCode(store.userId);
+        store.appState = 'game'
+    }
 
     return (
         <div style={home()}>
@@ -15,7 +22,7 @@ function Home() {
             <div style={joinRoom()}>
                 <input type='text' maxLength={4} style={joinRoomTextBox()} />
                 <Button onClick={() => console.log('Join room')} text='Join Room'></Button>
-                <Button onClick={() => console.log('Create room')} text='Create Room'></Button>
+                <Button onClick={() => handleCreateRoom()} text='Create Room'></Button>
             </div>
             <div style={avatar()}>
                 <Button onClick={() => store.appState = 'game'} text='Go to game'></Button>
