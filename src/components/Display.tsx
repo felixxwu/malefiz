@@ -6,7 +6,7 @@ function Display() {
     const store = useStore()
 
     async function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-        await updateUsername(event.target.value, store)
+        await updateUsername(event.target.value)
     }
 
     return (
