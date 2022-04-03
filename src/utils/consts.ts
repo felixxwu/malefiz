@@ -4,6 +4,7 @@ export const consts = {
     playerPieceAttributeName: 'player-piece',
     gridSize: 100,
     primaryBg: '#6667ab',
+    primaryBgDark: '#464673',
     get lineWidth() {
         return this.gridSize / 20
     },

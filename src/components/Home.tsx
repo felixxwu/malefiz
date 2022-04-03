@@ -3,7 +3,7 @@ import React from 'react'
 import logo from '../images/logo.svg'
 import Button from './Button'
 import { generateCode } from '../db/generate-room-code'
-import { async } from '@firebase/util'
+import { consts } from '../utils/consts'
 
 function Home() {
     const store = useStore()
@@ -21,11 +21,11 @@ function Home() {
             </div>
             <div style={joinRoom()}>
                 <input type='text' maxLength={4} style={joinRoomTextBox()} />
-                <Button onClick={() => console.log('Join room')} text='Join Room'></Button>
-                <Button onClick={() => handleCreateRoom()} text='Create Room'></Button>
+                <Button onClick={() => console.log('Join room')} text='Join Room' />
+                <Button onClick={() => handleCreateRoom()} text='Create Room' />
             </div>
             <div style={avatar()}>
-                <Button onClick={() => (store.appState = 'game')} text='Go to game'></Button>
+                <Button onClick={() => (store.appState = 'game')} text='Go to game' />
             </div>
         </div>
     )
@@ -53,6 +53,7 @@ function Home() {
             justifyItems: 'center',
             fontFamily: 'Lexend Deca',
             fontSize: 'x-large',
+            color: consts.primaryBgDark,
         }
     }
 
@@ -79,16 +80,18 @@ function Home() {
 
     function joinRoomTextBox(): React.CSSProperties {
         return {
+            color: consts.primaryBgDark,
             display: 'block',
             margin: 'auto',
             border: 'none',
             padding: 0,
             width: '6ch',
             background: `repeating-linear-gradient(90deg, 
-                dimgrey 0, dimgrey 1ch, 
+                ${consts.primaryBgDark} 0, ${consts.primaryBgDark} 1ch, 
                 transparent 0, transparent 1.5ch) 
                 0 100%/ 5.5ch 2px no-repeat`,
-            font: '3ch droid sans mono, consolas, monospace',
+            font: '4ch droid sans mono, consolas, monospace',
+            fontWeight: 'bold',
             letterSpacing: '0.5ch',
             outline: 'none',
             textTransform: 'uppercase',
