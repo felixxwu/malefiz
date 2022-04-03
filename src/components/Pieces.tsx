@@ -11,8 +11,8 @@ export function Pieces() {
             {store.pieces.map(piece => (
                 <circle
                     key={piece.id}
-                    cx={(piece.x - store.mapLoaded.left) * consts.gridSize}
-                    cy={(piece.y - store.mapLoaded.top) * consts.gridSize}
+                    cx={(piece.x - store.map.left) * consts.gridSize}
+                    cy={(piece.y - store.map.top) * consts.gridSize}
                     r={consts.gridSize / 3.5}
                     {...{ [consts.playerPieceAttributeName]: piece.id }}
                     style={style()}
@@ -77,8 +77,8 @@ const viewHandler = {
     movePiece(x: number, y: number, store: storeType, animated: boolean = false) {
         if (this.pieceElementToDrag === null) return null
         this.pieceElementToDrag.style.transition = animated ? '0.3s' : 'none'
-        const xPos = (x - store.mapLoaded.left) * consts.gridSize
-        const yPos = (y - store.mapLoaded.top) * consts.gridSize
+        const xPos = (x - store.map.left) * consts.gridSize
+        const yPos = (y - store.map.top) * consts.gridSize
         this.pieceElementToDrag.setAttribute('cx', `${xPos}`)
         this.pieceElementToDrag.setAttribute('cy', `${yPos}`)
     },
@@ -103,14 +103,12 @@ const viewHandler = {
     getMapSpaceCoordinates(clientX: number, clientY: number, store: storeType) {
         const svgRect = this.getSVGRect()
         if (svgRect === null) return null
-        const mapWidth = store.mapLoaded.right - store.mapLoaded.left
-        const mapHeight = store.mapLoaded.bottom - store.mapLoaded.top
         const xPerCent = (clientX - svgRect.left) / svgRect.width
         const yPerCent = (clientY - svgRect.top) / svgRect.height
-        const xPos = mapWidth * xPerCent + store.mapLoaded.left
-        const yPos = mapHeight * yPerCent + store.mapLoaded.top
-        const xPosBounded = Math.max(store.mapLoaded.left, Math.min(xPos, store.mapLoaded.right))
-        const yPosBounded = Math.max(store.mapLoaded.top, Math.min(yPos, store.mapLoaded.bottom))
+        const xPos = store.mapWidth * xPerCent + store.map.left
+        const yPos = store.mapHeight * yPerCent + store.map.top
+        const xPosBounded = Math.max(store.map.left, Math.min(xPos, store.map.right))
+        const yPosBounded = Math.max(store.map.top, Math.min(yPos, store.map.bottom))
         return { x: xPosBounded, y: yPosBounded }
     },
     getSVGRect() {

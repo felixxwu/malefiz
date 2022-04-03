@@ -12,8 +12,8 @@ export function Points() {
         return (
             <circle
                 key={uniqueId()}
-                cx={(data.pos.x - store.mapLoaded.left) * consts.gridSize}
-                cy={(data.pos.y - store.mapLoaded.top) * consts.gridSize}
+                cx={(data.pos.x - store.map.left) * consts.gridSize}
+                cy={(data.pos.y - store.map.top) * consts.gridSize}
                 r={consts.pointSize}
             />
         )
@@ -23,7 +23,7 @@ export function Points() {
 }
 
 export function getSerialisedPoints(store: storeType) {
-    const map = store.mapLoaded
+    const map = store.map
     const pointIds = Object.keys(map.points) as unknown as Array<keyof typeof map.points>
     return pointIds.map(id => ({ id, data: map.points[id] }))
 }

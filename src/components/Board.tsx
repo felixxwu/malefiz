@@ -8,9 +8,7 @@ import { useStore } from '../utils/store'
 function Board() {
     const store = useStore()
 
-    const viewBox = `0 0 ${(store.mapLoaded.right - store.mapLoaded.left) * consts.gridSize} ${
-        (store.mapLoaded.bottom - store.mapLoaded.top) * consts.gridSize
-    }`
+    const viewBox = `0 0 ${store.mapWidth * consts.gridSize} ${store.mapHeight * consts.gridSize}`
 
     return (
         <div style={board()}>
@@ -24,8 +22,8 @@ function Board() {
 
     function board(): React.CSSProperties {
         return {
-            width: (store.mapLoaded.right - store.mapLoaded.left) * consts.gridSize,
-            height: (store.mapLoaded.bottom - store.mapLoaded.top) * consts.gridSize,
+            width: store.mapWidth * consts.gridSize,
+            height: store.mapHeight * consts.gridSize,
         }
     }
 

@@ -10,8 +10,14 @@ const config = {
     roomCode: '',
     appState: <AppState>'game',
     pieces: <Piece[]>[{ id: 1, x: 1, y: 1 }],
-    mapLoaded: map1,
     connectionError: '',
+    map: map1,
+    get mapWidth() {
+        return this.map.right - this.map.left
+    },
+    get mapHeight() {
+        return this.map.bottom - this.map.top
+    },
 }
 
 export const useStore = defineStore(config)

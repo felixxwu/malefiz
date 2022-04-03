@@ -10,14 +10,14 @@ export function Lines() {
     const points = getSerialisedPoints(store)
     const boardLines = points.map(({ data }) => {
         return data.neighbours.map(neighbour => {
-            const neighbourPoint = store.mapLoaded.points[neighbour]
+            const neighbourPoint = store.map.points[neighbour]
             return (
                 <line
                     key={uniqueId()}
-                    x1={(data.pos.x - store.mapLoaded.left) * consts.gridSize}
-                    y1={(data.pos.y - store.mapLoaded.top) * consts.gridSize}
-                    x2={(neighbourPoint.pos.x - store.mapLoaded.left) * consts.gridSize}
-                    y2={(neighbourPoint.pos.y - store.mapLoaded.top) * consts.gridSize}
+                    x1={(data.pos.x - store.map.left) * consts.gridSize}
+                    y1={(data.pos.y - store.map.top) * consts.gridSize}
+                    x2={(neighbourPoint.pos.x - store.map.left) * consts.gridSize}
+                    y2={(neighbourPoint.pos.y - store.map.top) * consts.gridSize}
                     style={{ strokeWidth: consts.lineWidth, stroke: 'black' }}
                 />
             )
