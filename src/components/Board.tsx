@@ -1,12 +1,14 @@
-import { map1 } from '../maps/map1'
 import React from 'react'
 import { consts } from '../utils/consts'
 import { Pieces } from './Pieces'
 import { Points } from './Points'
 import { Lines } from './Lines'
+import { useStore } from '../utils/store'
 
 function Board() {
-    const viewBox = `0 0 ${map1.width * consts.gridSize} ${map1.height * consts.gridSize}`
+    const store = useStore()
+
+    const viewBox = `0 0 ${store.mapWidth * consts.gridSize} ${store.mapHeight * consts.gridSize}`
 
     return (
         <div style={board()}>
@@ -20,8 +22,8 @@ function Board() {
 
     function board(): React.CSSProperties {
         return {
-            width: map1.width * consts.gridSize,
-            height: map1.height * consts.gridSize,
+            width: store.mapWidth * consts.gridSize,
+            height: store.mapHeight * consts.gridSize,
         }
     }
 

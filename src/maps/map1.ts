@@ -1,8 +1,10 @@
 import { Map } from '../utils/types'
 
 export const map1: Map = {
-    width: 5,
-    height: 2,
+    top: 0,
+    left: 0,
+    right: 5,
+    bottom: 2,
     points: {
         0: {
             type: 'end',
