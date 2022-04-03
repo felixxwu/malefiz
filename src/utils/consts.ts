@@ -5,6 +5,7 @@ export const consts = {
     gridSize: 100,
     primaryBg: '#6667ab',
     primaryBgDark: '#464673',
+    distanceToCancelPieceDrop: 0.5,
     get lineWidth() {
         return this.gridSize / 20
     },

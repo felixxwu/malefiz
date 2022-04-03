@@ -2,6 +2,7 @@ import { storeType, useStore } from '../utils/store'
 import { consts } from '../utils/consts'
 import React from 'react'
 import { map1 } from '../maps/map1'
+import { getClosestPoint } from './Points'
 
 export function Pieces() {
     const store = useStore()
@@ -46,10 +47,11 @@ export function onPointerMove(event: React.PointerEvent) {
 export function onPointerUp(event: React.PointerEvent, store: storeType) {
     const coordinates = viewHandler.getMapSpaceCoordinates(event.clientX, event.clientY)
     if (coordinates === null) return
-    if (coordinates.x > 2) {
+    const closestPoint = getClosestPoint(coordinates.x, coordinates.y, store)
+    if (closestPoint.distance > consts.distanceToCancelPieceDrop || closestPoint.data === null) {
         cancelPointerEvent(store)
     } else {
-        savePiecePosition(coordinates.x, coordinates.y, store)
+        savePiecePosition(closestPoint.data.pos.x, closestPoint.data.pos.y, store)
     }
 }
 
