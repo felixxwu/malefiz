@@ -12,8 +12,8 @@ export function Points() {
         return (
             <circle
                 key={uniqueId()}
-                cx={data.pos.x * consts.gridSize}
-                cy={data.pos.y * consts.gridSize}
+                cx={(data.pos.x - store.mapLoaded.left) * consts.gridSize}
+                cy={(data.pos.y - store.mapLoaded.top) * consts.gridSize}
                 r={consts.pointSize}
             />
         )

@@ -9,15 +9,17 @@ export type AppState = 'home' | 'game'
 export type Id = number
 
 export interface Map {
-    width: number
-    height: number
+    top: number
+    left: number
+    right: number
+    bottom: number
     points: {
         [id: Id]: Point
     }
 }
 
 export interface Point {
-    type: 'start' | 'end' | 'mid'
+    type: 'start' | 'end' | 'mid' | 'stone'
     pos: {
         x: number
         y: number

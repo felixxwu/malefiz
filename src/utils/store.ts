@@ -8,7 +8,7 @@ const config = {
     userId: '',
     userName: '',
     roomCode: '',
-    appState: <AppState>'home',
+    appState: <AppState>'game',
     pieces: <Piece[]>[{ id: 1, x: 1, y: 1 }],
     mapLoaded: map1,
     connectionError: '',

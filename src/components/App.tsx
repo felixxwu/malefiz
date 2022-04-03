@@ -23,7 +23,7 @@ function App() {
         <div
             style={app()}
             onPointerDown={e => onPointerDown(e)}
-            onPointerMove={e => onPointerMove(e)}
+            onPointerMove={e => onPointerMove(e, store)}
             onPointerUp={e => onPointerUp(e, store)}
             onPointerCancel={() => cancelPointerEvent(store)}
             onPointerLeave={() => cancelPointerEvent(store)}
