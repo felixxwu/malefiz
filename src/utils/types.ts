@@ -4,7 +4,7 @@ export interface User {
     lastSeen: number
 }
 
-export type AppState = 'home' | 'game'
+export type AppState = 'home' | 'game' | 'createroom'
 
 export type Id = number
 

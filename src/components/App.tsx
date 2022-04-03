@@ -3,6 +3,7 @@ import { useStore } from '../utils/store'
 import React, { useEffect } from 'react'
 import Home from './Home'
 import Game from './Game'
+import CreateRoom from './CreateRoom'
 import { cancelPointerEvent, onPointerDown, onPointerMove, onPointerUp } from './Pieces'
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
                         return <Game />
                     case 'home':
                         return <Home />
+                    case 'createroom':
+                        return <CreateRoom />
                 }
             })()}
         </div>

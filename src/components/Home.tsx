@@ -9,8 +9,7 @@ function Home() {
     const store = useStore()
 
     const handleCreateRoom = async () => {
-        store.roomCode = store.roomCode ? store.roomCode : await generateCode(store.userId)
-        store.appState = 'game'
+        store.appState = 'createroom'
     }
 
     return (

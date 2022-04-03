@@ -7,7 +7,6 @@ const config = {
     appHeight: window.innerHeight,
     userId: '',
     userName: '',
-    roomCode: '',
     appState: <AppState>'home',
     pieces: <Piece[]>[{ id: 1, x: 1, y: 1 }],
     mapLoaded: map1,
