@@ -1,6 +1,6 @@
-import {useStore} from "../utils/store";
+import { useStore } from '../utils/store'
 import styled from 'styled-components'
-import {consts} from '../utils/consts'
+import { consts } from '../utils/consts'
 
 interface ButtonProps {
     onClick: () => void
@@ -10,12 +10,7 @@ interface ButtonProps {
 function Button(props: ButtonProps) {
     const store = useStore()
 
-    return (
-        <ButtonCSS onClick={props.onClick}>
-            {props.text}
-        </ButtonCSS>
-    )
-
+    return <ButtonCSS onClick={props.onClick}>{props.text}</ButtonCSS>
 }
 
 const ButtonCSS = styled.button`
@@ -32,7 +27,7 @@ const ButtonCSS = styled.button`
     &:hover {
         box-shadow: 0px 0px 0 0 ${consts.primaryBg};
         background-color: ${consts.primaryBg};
-        color: white ;
+        color: white;
     }
 `
 

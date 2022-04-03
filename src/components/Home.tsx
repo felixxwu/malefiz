@@ -1,22 +1,22 @@
-import {useStore} from '../utils/store';
-import React from 'react';
+import { useStore } from '../utils/store'
+import React from 'react'
 import logo from '../images/logo.svg'
-import Button from './Button';
-import {generateCode} from '../db/generate-room-code'
-import { async } from '@firebase/util';
+import Button from './Button'
+import { generateCode } from '../db/generate-room-code'
+import { async } from '@firebase/util'
 
 function Home() {
     const store = useStore()
 
-    const handleCreateRoom= async() => {
-        store.roomCode = store.roomCode? store.roomCode: await generateCode(store.userId);
+    const handleCreateRoom = async () => {
+        store.roomCode = store.roomCode ? store.roomCode : await generateCode(store.userId)
         store.appState = 'game'
     }
 
     return (
         <div style={home()}>
             <div style={title()}>
-                <img src={logo} width="80" alt="Logo" /> 
+                <img src={logo} width='80' alt='Logo' />
                 Malefiz
             </div>
             <div style={joinRoom()}>
@@ -25,11 +25,11 @@ function Home() {
                 <Button onClick={() => handleCreateRoom()} text='Create Room'></Button>
             </div>
             <div style={avatar()}>
-                <Button onClick={() => store.appState = 'game'} text='Go to game'></Button>
+                <Button onClick={() => (store.appState = 'game')} text='Go to game'></Button>
             </div>
         </div>
     )
-    
+
     function home(): React.CSSProperties {
         return {
             width: '100%',
@@ -39,7 +39,7 @@ function Home() {
             gridTemplateRows: '0.8fr 1.2fr',
             gap: '20px 0px',
             gridAutoFlow: 'row',
-            gridTemplateAreas:"'title title' 'joinRoom avatar'"
+            gridTemplateAreas: "'title title' 'joinRoom avatar'",
         }
     }
 
@@ -58,22 +58,22 @@ function Home() {
 
     function joinRoom(): React.CSSProperties {
         return {
-            gridArea: 'joinRoom', 
+            gridArea: 'joinRoom',
             display: 'grid',
             justifySelf: 'center',
             alignSelf: 'start',
-            gap: '15px'
+            gap: '15px',
         }
     }
 
     function avatar(): React.CSSProperties {
         return {
-            gridArea: 'avatar', 
+            gridArea: 'avatar',
             display: 'grid',
             justifySelf: 'center',
             alignSelf: 'start',
             gap: '15px',
-            marginTop: '20px' // Delete when grid area replaced with avatar contents
+            marginTop: '20px', // Delete when grid area replaced with avatar contents
         }
     }
 
@@ -91,7 +91,7 @@ function Home() {
             font: '3ch droid sans mono, consolas, monospace',
             letterSpacing: '0.5ch',
             outline: 'none',
-            textTransform: 'uppercase'
+            textTransform: 'uppercase',
         }
     }
 }

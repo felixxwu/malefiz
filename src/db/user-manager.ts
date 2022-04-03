@@ -1,10 +1,10 @@
-import {useStore, storeType} from "../utils/store";
-import {useEffect} from "react";
-import {addDoc, collection, doc, getFirestore, updateDoc, getDoc} from "firebase/firestore";
-import {consts} from "../utils/consts";
-import {User} from "../utils/types";
+import { useStore, storeType } from '../utils/store'
+import { useEffect } from 'react'
+import { addDoc, collection, doc, getFirestore, updateDoc, getDoc } from 'firebase/firestore'
+import { consts } from '../utils/consts'
+import { User } from '../utils/types'
 import Chance from 'chance'
-import {debounce} from "throttle-debounce";
+import { debounce } from 'throttle-debounce'
 
 const chance = new Chance(Math.random)
 
@@ -13,10 +13,10 @@ export function initUser() {
     const store = useStore()
 
     useEffect(() => {
-        (async () => {
+        ;(async () => {
             try {
                 // userData will always be a valid user, whether it's an existing one or not
-                const userData = await getUserDataFromDb() ?? createNewUserData()
+                const userData = (await getUserDataFromDb()) ?? createNewUserData()
 
                 // localStorageUserId can be null here, in which case a new user will be created
                 await createOrUpdateUser(userData, store)
@@ -28,9 +28,9 @@ export function initUser() {
 }
 
 function createNewUserData(): User {
-    const now = (new Date()).getTime()
+    const now = new Date().getTime()
     return {
-        name: chance.word({capitalize: true}),
+        name: chance.word({ capitalize: true }),
         created: now,
         lastSeen: now,
     }
@@ -75,9 +75,9 @@ async function createOrUpdateUser(userData: Partial<User>, store: storeType) {
 
 // debounce only fires the last request in a burst of successive events
 const updateDocDebounced = debounce(500, async (id: string, userData: Partial<User>) => {
-    const now = (new Date()).getTime()
+    const now = new Date().getTime()
     const db = getFirestore()
-    await updateDoc(doc(db, consts.userCollection, id), {...userData, lastSeen: now})
+    await updateDoc(doc(db, consts.userCollection, id), { ...userData, lastSeen: now })
 })
 
 // user can be loaded with initUser()
@@ -90,5 +90,3 @@ export async function updateUsername(newName: string, store: storeType) {
     const updateData: Partial<User> = { name: newName }
     await createOrUpdateUser(updateData, store)
 }
-
-

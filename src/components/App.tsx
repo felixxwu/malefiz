@@ -1,9 +1,9 @@
-import {initUser, isUserLoaded} from "../db/user-manager";
-import {useStore} from "../utils/store";
-import React, {useEffect} from "react";
-import Home from "./Home";
-import Game from "./Game";
-import {cancelPointerEvent, onPointerDown, onPointerMove, onPointerUp} from "./Pieces";
+import { initUser, isUserLoaded } from '../db/user-manager'
+import { useStore } from '../utils/store'
+import React, { useEffect } from 'react'
+import Home from './Home'
+import Game from './Game'
+import { cancelPointerEvent, onPointerDown, onPointerMove, onPointerUp } from './Pieces'
 
 function App() {
     const store = useStore()
@@ -19,29 +19,30 @@ function App() {
         resize()
     }, [])
 
-    return <div
-        style={app()}
-        onPointerDown={e => onPointerDown(e)}
-        onPointerMove={e => onPointerMove(e)}
-        onPointerUp={e => onPointerUp(e, store)}
-        onPointerCancel={() => cancelPointerEvent(store)}
-        onPointerLeave={() => cancelPointerEvent(store)}
-    >
-        {(() => {
-            if (store.connectionError !== '') return (
-                <div>Could not connect to the server. {store.connectionError}</div>
-            )
+    return (
+        <div
+            style={app()}
+            onPointerDown={e => onPointerDown(e)}
+            onPointerMove={e => onPointerMove(e)}
+            onPointerUp={e => onPointerUp(e, store)}
+            onPointerCancel={() => cancelPointerEvent(store)}
+            onPointerLeave={() => cancelPointerEvent(store)}
+        >
+            {(() => {
+                if (store.connectionError !== '')
+                    return <div>Could not connect to the server. {store.connectionError}</div>
 
-            if (!isUserLoaded(store)) return (
-                <div>Loading...</div>
-            )
+                if (!isUserLoaded(store)) return <div>Loading...</div>
 
-            switch (store.appState) {
-                case 'game': return <Game />
-                case 'home': return <Home />
-            }
-        })()}
-    </div>
+                switch (store.appState) {
+                    case 'game':
+                        return <Game />
+                    case 'home':
+                        return <Home />
+                }
+            })()}
+        </div>
+    )
 
     function app(): React.CSSProperties {
         return {
@@ -52,7 +53,6 @@ function App() {
             justifyContent: 'center',
         }
     }
-
 }
 
 export default App

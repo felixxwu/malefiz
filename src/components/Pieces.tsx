@@ -1,23 +1,25 @@
-import {storeType, useStore} from "../utils/store";
-import {consts} from "../utils/consts";
-import React from "react";
-import {map1} from "../maps/map1";
+import { storeType, useStore } from '../utils/store'
+import { consts } from '../utils/consts'
+import React from 'react'
+import { map1 } from '../maps/map1'
 
 export function Pieces() {
     const store = useStore()
 
-    return <>
-        {store.pieces.map(piece => (
-            <circle
-                key={piece.id}
-                cx={piece.x * consts.gridSize}
-                cy={piece.y * consts.gridSize}
-                r={30}
-                {...{[consts.playerPieceAttributeName]: piece.id}}
-                style={style()}
-            />
-        ))}
-    </>
+    return (
+        <>
+            {store.pieces.map(piece => (
+                <circle
+                    key={piece.id}
+                    cx={piece.x * consts.gridSize}
+                    cy={piece.y * consts.gridSize}
+                    r={30}
+                    {...{ [consts.playerPieceAttributeName]: piece.id }}
+                    style={style()}
+                />
+            ))}
+        </>
+    )
 
     function style(): React.CSSProperties {
         return {
@@ -60,7 +62,7 @@ export function cancelPointerEvent(store: storeType) {
 
 function savePiecePosition(x: number, y: number, store: storeType) {
     store.pieces = store.pieces.map(piece => {
-        return piece.id === viewHandler.getPieceId() ? {...piece, x, y} : piece
+        return piece.id === viewHandler.getPieceId() ? { ...piece, x, y } : piece
     })
     viewHandler.movePiece(x, y, true)
     viewHandler.destroy()
@@ -104,7 +106,7 @@ const viewHandler = {
         const yPos = map1.height * yPerCent
         const xPosBounded = Math.max(0, Math.min(xPos, map1.width))
         const yPosBounded = Math.max(0, Math.min(yPos, map1.height))
-        return {x: xPosBounded, y: yPosBounded}
+        return { x: xPosBounded, y: yPosBounded }
     },
     getSVGRect() {
         if (this.pieceElementToDrag === null) return null
