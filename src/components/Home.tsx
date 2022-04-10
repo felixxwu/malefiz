@@ -1,17 +1,21 @@
 import { useStore } from '../utils/store'
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../images/logo.svg'
 import Button from './Button'
-import { generateCode } from '../db/generate-room-code'
 import { consts } from '../utils/consts'
 import { useNavigate } from 'react-router-dom'
 
 function Home() {
     const store = useStore()
     const navigate = useNavigate()
+    const [roomCode, setRoomCode] = useState('')
 
     const handleCreateRoom = async () => {
         navigate('/createroom')
+    }
+
+    const handleJoinRoom = async () => {
+        navigate(`/room/${roomCode}`, { replace: true })
     }
 
     return (
@@ -21,8 +25,13 @@ function Home() {
                 Malefiz
             </div>
             <div style={joinRoom()}>
-                <input type='text' maxLength={4} style={joinRoomTextBox()} />
-                <Button onClick={() => console.log('Join room')} text='Join Room' />
+                <input
+                    type='text'
+                    maxLength={4}
+                    style={joinRoomTextBox()}
+                    onChange={event => setRoomCode(event.target.value)}
+                />
+                <Button onClick={() => handleJoinRoom()} text='Join Room' />
                 <Button onClick={() => handleCreateRoom()} text='Create Room' />
             </div>
             <div style={avatar()}>
@@ -96,6 +105,7 @@ function Home() {
             letterSpacing: '0.5ch',
             outline: 'none',
             textTransform: 'uppercase',
+            caretColor: 'transparent', //Hide the input insertion caret
         }
     }
 }
