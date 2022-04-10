@@ -4,12 +4,14 @@ import logo from '../images/logo.svg'
 import Button from './Button'
 import { generateCode } from '../db/generate-room-code'
 import { consts } from '../utils/consts'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
     const store = useStore()
+    const navigate = useNavigate()
 
     const handleCreateRoom = async () => {
-        store.appState = 'createroom'
+        navigate('/createroom')
     }
 
     return (
@@ -24,7 +26,7 @@ function Home() {
                 <Button onClick={() => handleCreateRoom()} text='Create Room' />
             </div>
             <div style={avatar()}>
-                <Button onClick={() => (store.appState = 'game')} text='Go to game' />
+                <Button onClick={() => navigate('room')} text='Go to game' />
             </div>
         </div>
     )

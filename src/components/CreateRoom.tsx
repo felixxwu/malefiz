@@ -7,10 +7,9 @@ function CreateRoom() {
     const store = useStore()
     const navigate = useNavigate()
 
-    const handlePlayerNumberClick = (numberofPlayers: number) => {
-        const roomCode = generateCode(store.userId, numberofPlayers)
-        store.appState = 'game'
-        navigate('/room')
+    const handlePlayerNumberClick = async (numberofPlayers: number) => {
+        const roomCode = await generateCode(store.userId, numberofPlayers)
+        navigate(`/room/${roomCode}`, { replace: true })
     }
 
     return (

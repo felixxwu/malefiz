@@ -37,16 +37,13 @@ function App() {
                     return <div>Could not connect to the server. {store.connectionError}</div>
 
                 if (!isUserLoaded()) return <div>Loading...</div>
-
-                switch (store.appState) {
-                    case 'game':
-                        return <Game />
-                    case 'home':
-                        return <Home />
-                    case 'createroom':
-                        return <CreateRoom />
-                }
             })()}
+
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='createroom' element={<CreateRoom />} />
+                <Route path='room/:roomid' element={<Game />} />
+            </Routes>
         </div>
     )
 
