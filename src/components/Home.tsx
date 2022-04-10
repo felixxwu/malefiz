@@ -15,7 +15,7 @@ function Home() {
     }
 
     const handleJoinRoom = async () => {
-        navigate(`/room/${roomCode}`, { replace: true })
+        navigate(`/room/${roomCode}`)
     }
 
     return (
