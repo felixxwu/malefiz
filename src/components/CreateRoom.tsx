@@ -1,14 +1,25 @@
+import { generateCode } from '../db/generate-room-code'
 import { useStore } from '../utils/store'
 import Button from './Button'
+import { useNavigate } from 'react-router-dom'
 
 function CreateRoom() {
+    const store = useStore()
+    const navigate = useNavigate()
+
+    const handlePlayerNumberClick = (numberofPlayers: number) => {
+        const roomCode = generateCode(store.userId, numberofPlayers)
+        store.appState = 'game'
+        navigate('/room')
+    }
+
     return (
         <div style={createroomgrid()}>
-            <Button onClick={() => console.log('2 players')} text='2 players' />
-            <Button onClick={() => console.log('3 players')} text='3 players' />
-            <Button onClick={() => console.log('4 players')} text='4 players' />
-            <Button onClick={() => console.log('5 players')} text='5 players' />
-            <Button onClick={() => console.log('6 players')} text='6 players' />
+            <Button onClick={() => handlePlayerNumberClick(2)} text='2 players' />
+            <Button onClick={() => handlePlayerNumberClick(3)} text='3 players' />
+            <Button onClick={() => handlePlayerNumberClick(4)} text='4 players' />
+            <Button onClick={() => handlePlayerNumberClick(5)} text='5 players' />
+            <Button onClick={() => handlePlayerNumberClick(6)} text='6 players' />
         </div>
     )
 

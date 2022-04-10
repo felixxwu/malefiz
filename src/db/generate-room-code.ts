@@ -1,7 +1,11 @@
 import { deleteDoc, doc, getFirestore, setDoc } from 'firebase/firestore'
 import { getAllRoomCodes } from './get-all-room-codes'
 
-export async function generateCode(userId: string, codeLength: number = 4) {
+export async function generateCode(
+    userId: string,
+    numberOfPlayers: number = 1,
+    codeLength: number = 4
+) {
     let code
     const usedCodes = new Set(await getAllRoomCodes())
 
@@ -12,6 +16,7 @@ export async function generateCode(userId: string, codeLength: number = 4) {
     const db = getFirestore()
     await setDoc(doc(db, 'rooms', code), {
         userIds: [userId],
+        numberOfPlayers: numberOfPlayers,
     })
 
     return code

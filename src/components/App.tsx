@@ -5,6 +5,7 @@ import Home from './Home'
 import Game from './Game'
 import CreateRoom from './CreateRoom'
 import { cancelPointerEvent, onPointerDown, onPointerMove, onPointerUp } from './Pieces'
+import { Routes, Route, Link } from 'react-router-dom'
 
 function App() {
     const store = useStore()
