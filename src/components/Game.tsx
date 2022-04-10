@@ -12,7 +12,7 @@ function Game() {
 
     useEffect(() => {
         async function doesRoomExist() {
-            const docRef = doc(db, 'rooms', roomid)
+            const docRef = doc(db, 'rooms', roomid.toUpperCase())
             const docSnap = await getDoc(docRef)
 
             setIsRoomValid(docSnap.exists())
@@ -24,7 +24,7 @@ function Game() {
     return (
         <div>
             <div>
-                The room code is <b>{isRoomValid ? roomid : 'invalid'}</b>
+                The room code is <b>{isRoomValid ? roomid.toUpperCase() : 'invalid'}</b>
             </div>
             <Board />
         </div>
