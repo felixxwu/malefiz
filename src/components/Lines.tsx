@@ -7,7 +7,7 @@ import { getSerialisedPoints } from './Points'
 export function Lines() {
     const store = useStore()
 
-    const points = getSerialisedPoints(store)
+    const points = getSerialisedPoints()
     const boardLines = points.map(({ data }) => {
         return data.neighbours.map(neighbour => {
             const neighbourPoint = store.map.points[neighbour]

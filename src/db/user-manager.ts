@@ -1,4 +1,4 @@
-import { useStore, storeType } from '../utils/store'
+import { useStore, global } from '../utils/store'
 import { useEffect } from 'react'
 import { addDoc, collection, doc, getFirestore, updateDoc, getDoc } from 'firebase/firestore'
 import { consts } from '../utils/consts'
@@ -19,7 +19,7 @@ export function initUser() {
                 const userData = (await getUserDataFromDb()) ?? createNewUserData()
 
                 // localStorageUserId can be null here, in which case a new user will be created
-                await createOrUpdateUser(userData, store)
+                await createOrUpdateUser(userData)
             } catch (e) {
                 store.connectionError = `${e}`
             }
@@ -54,7 +54,7 @@ async function getUserDataFromDb() {
 }
 
 // if userId is null, create a new user in the db and use the newly generated id
-async function createOrUpdateUser(userData: Partial<User>, store: storeType) {
+async function createOrUpdateUser(userData: Partial<User>) {
     let userId = localStorage.getItem(consts.localStoreUserIdKey)
     if (userId === null) {
         const db = getFirestore()
@@ -63,8 +63,8 @@ async function createOrUpdateUser(userData: Partial<User>, store: storeType) {
     }
 
     // update store
-    store.userId = userId
-    if (userData.name !== undefined) store.userName = userData.name
+    global.store.userId = userId
+    if (userData.name !== undefined) global.store.userName = userData.name
 
     // update localstorage
     localStorage.setItem(consts.localStoreUserIdKey, userId)
@@ -81,12 +81,12 @@ const updateDocDebounced = debounce(500, async (id: string, userData: Partial<Us
 })
 
 // user can be loaded with initUser()
-export function isUserLoaded(store: storeType) {
-    return store.userId !== ''
+export function isUserLoaded() {
+    return global.store.userId !== ''
 }
 
 // updates the db and store with new username
-export async function updateUsername(newName: string, store: storeType) {
+export async function updateUsername(newName: string) {
     const updateData: Partial<User> = { name: newName }
-    await createOrUpdateUser(updateData, store)
+    await createOrUpdateUser(updateData)
 }

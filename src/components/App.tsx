@@ -1,5 +1,5 @@
 import { initUser, isUserLoaded } from '../db/user-manager'
-import { useStore } from '../utils/store'
+import { global, useStore } from '../utils/store'
 import React, { useEffect } from 'react'
 import Home from './Home'
 import Game from './Game'
@@ -9,6 +9,8 @@ import { Routes, Route, Link } from 'react-router-dom'
 
 function App() {
     const store = useStore()
+    global.store = store
+
     initUser()
 
     useEffect(() => {
@@ -25,16 +27,16 @@ function App() {
         <div
             style={app()}
             onPointerDown={e => onPointerDown(e)}
-            onPointerMove={e => onPointerMove(e, store)}
-            onPointerUp={e => onPointerUp(e, store)}
-            onPointerCancel={() => cancelPointerEvent(store)}
-            onPointerLeave={() => cancelPointerEvent(store)}
+            onPointerMove={e => onPointerMove(e)}
+            onPointerUp={e => onPointerUp(e)}
+            onPointerCancel={() => cancelPointerEvent()}
+            onPointerLeave={() => cancelPointerEvent()}
         >
             {(() => {
                 if (store.connectionError !== '')
                     return <div>Could not connect to the server. {store.connectionError}</div>
 
-                if (!isUserLoaded(store)) return <div>Loading...</div>
+                if (!isUserLoaded()) return <div>Loading...</div>
 
                 switch (store.appState) {
                     case 'game':

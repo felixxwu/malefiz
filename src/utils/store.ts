@@ -22,3 +22,14 @@ const config = {
 export const useStore = defineStore(config)
 
 export type storeType = typeof config
+
+export const global = {
+    storeValue: <storeType | null>null,
+    set store(value: storeType) {
+        this.storeValue = value
+    },
+    get store() {
+        if (this.storeValue === null) throw Error('Did not initialise global store before using it')
+        return this.storeValue
+    },
+}
