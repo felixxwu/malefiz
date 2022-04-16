@@ -6,6 +6,7 @@ import Game from './Game'
 import CreateRoom from './CreateRoom'
 import { cancelPointerEvent, onPointerDown, onPointerMove, onPointerUp } from './Pieces'
 import { Routes, Route, Link } from 'react-router-dom'
+import PageNotFound from './PageNotFound'
 
 function App() {
     const store = useStore()
@@ -43,6 +44,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='createroom' element={<CreateRoom />} />
                 <Route path='room/:roomid' element={<Game />} />
+                <Route path='*' element={<PageNotFound />} />
             </Routes>
         </div>
     )
