@@ -34,18 +34,21 @@ function App() {
             onPointerLeave={() => cancelPointerEvent()}
         >
             {(() => {
+                // TODO think of a way to clean this up
                 if (store.connectionError !== '')
                     return <div>Could not connect to the server. {store.connectionError}</div>
 
                 if (!isUserLoaded()) return <div>Loading...</div>
-            })()}
 
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='createroom' element={<CreateRoom />} />
-                <Route path='room/:roomid' element={<Game />} />
-                <Route path='*' element={<PageNotFound />} />
-            </Routes>
+                return (
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='createroom' element={<CreateRoom />} />
+                        <Route path='room/:roomid' element={<Game />} />
+                        <Route path='*' element={<PageNotFound />} />
+                    </Routes>
+                )
+            })()}
         </div>
     )
 
