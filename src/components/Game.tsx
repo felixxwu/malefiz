@@ -18,7 +18,7 @@ function Game() {
             setIsRoomValid(docSnap.exists())
             // Do smth with the user data here
         }
-        doesRoomExist().catch(e => console.error(e))
+        doesRoomExist().catch(console.error)
         global.store.map = map1
         global.store.pieces = [{ id: 1, x: 1, y: 1 }]
     }, [])

@@ -22,7 +22,7 @@ export function initUser() {
                 global.store.connectionError = `${e}`
             }
         }
-        init().catch(e => console.error(e))
+        init().catch(console.error)
     }, [])
 }
 
@@ -84,8 +84,13 @@ export function isUserLoaded() {
     return global.store.userId !== ''
 }
 
-// updates the db and store with new username
-export async function updateUsername(newName: string) {
-    const updateData: Partial<User> = { name: newName }
-    await createOrUpdateUser(updateData)
+export const username = {
+    // updates the db and store with new username
+    async set(newName: string) {
+        const updateData: Partial<User> = { name: newName }
+        await createOrUpdateUser(updateData)
+    },
+    get() {
+        return global.store.userName
+    },
 }

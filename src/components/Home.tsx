@@ -3,6 +3,7 @@ import logo from '../images/logo.svg'
 import Button from './Button'
 import { consts } from '../utils/consts'
 import { useNavigate } from 'react-router-dom'
+import { username } from '../db/user-manager'
 
 function Home() {
     const navigate = useNavigate()
@@ -14,6 +15,10 @@ function Home() {
 
     const handleJoinRoom = async () => {
         navigate(`/room/${roomCode}`)
+    }
+
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        username.set(event.target.value).catch(console.error)
     }
 
     return (
@@ -34,6 +39,8 @@ function Home() {
             </div>
             <div style={avatar()}>
                 <Button onClick={() => navigate('room')} text='Go to game' />
+                Username:
+                <input type='text' value={username.get()} onInput={handleNameChange} />
             </div>
         </div>
     )
