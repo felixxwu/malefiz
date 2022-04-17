@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import { useStore } from '../utils/store'
 import Board from './Board'
 import { doc, getFirestore, getDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
@@ -7,7 +6,6 @@ import { global } from '../utils/store'
 import { map1 } from '../maps/map1'
 
 function Game() {
-    const store = useStore()
     const db = getFirestore()
     let { roomid = '' } = useParams()
     const [isRoomValid, setIsRoomValid] = useState(false)
@@ -22,6 +20,7 @@ function Game() {
         }
         doesRoomExist().catch(e => console.error(e))
         global.store.map = map1
+        global.store.pieces = [{ id: 1, x: 1, y: 1 }]
     }, [])
 
     return (

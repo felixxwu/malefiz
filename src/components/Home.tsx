@@ -1,4 +1,3 @@
-import { useStore } from '../utils/store'
 import React, { useState } from 'react'
 import logo from '../images/logo.svg'
 import Button from './Button'
@@ -6,7 +5,6 @@ import { consts } from '../utils/consts'
 import { useNavigate } from 'react-router-dom'
 
 function Home() {
-    const store = useStore()
     const navigate = useNavigate()
     const [roomCode, setRoomCode] = useState('')
 

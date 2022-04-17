@@ -8,7 +8,7 @@ const config = {
     userId: '',
     userName: '',
     appState: <AppState>'home',
-    pieces: <Piece[]>[{ id: 1, x: 1, y: 1 }],
+    pieces: <Piece[]>[],
     connectionError: '',
     map: map1,
     mapWidth() {
@@ -20,6 +20,10 @@ const config = {
 }
 
 export const useStore = defineStore(config)
+
+export function initStore() {
+    global.store = useStore()
+}
 
 export type storeType = typeof config
 

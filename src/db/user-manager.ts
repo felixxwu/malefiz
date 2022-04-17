@@ -1,4 +1,4 @@
-import { useStore, global } from '../utils/store'
+import { global } from '../utils/store'
 import { useEffect } from 'react'
 import { addDoc, collection, doc, getFirestore, updateDoc, getDoc } from 'firebase/firestore'
 import { consts } from '../utils/consts'
@@ -10,10 +10,8 @@ const chance = new Chance(Math.random)
 
 // hook - take the user from localStorage, or create one if none defined
 export function initUser() {
-    const store = useStore()
-
     useEffect(() => {
-        ;(async () => {
+        async function init() {
             try {
                 // userData will always be a valid user, whether it's an existing one or not
                 const userData = (await getUserDataFromDb()) ?? createNewUserData()
@@ -21,9 +19,10 @@ export function initUser() {
                 // localStorageUserId can be null here, in which case a new user will be created
                 await createOrUpdateUser(userData)
             } catch (e) {
-                store.connectionError = `${e}`
+                global.store.connectionError = `${e}`
             }
-        })()
+        }
+        init().catch(e => console.error(e))
     }, [])
 }
 

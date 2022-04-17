@@ -1,19 +1,17 @@
 import { consts } from '../utils/consts'
 import { uniqueId } from '../utils/uniqueId'
 import React from 'react'
-import { global, useStore } from '../utils/store'
+import { global } from '../utils/store'
 import { Point } from '../utils/types'
 
 export function Points() {
-    const store = useStore()
-
     const points = getSerialisedPoints()
     const boardPoints = points.map(({ data }) => {
         return (
             <circle
                 key={uniqueId()}
-                cx={(data.pos.x - store.map.left) * consts.gridSize}
-                cy={(data.pos.y - store.map.top) * consts.gridSize}
+                cx={(data.pos.x - global.store.map.left) * consts.gridSize}
+                cy={(data.pos.y - global.store.map.top) * consts.gridSize}
                 r={consts.pointSize}
             />
         )

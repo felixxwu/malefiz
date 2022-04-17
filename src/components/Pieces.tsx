@@ -1,18 +1,16 @@
-import { global, useStore } from '../utils/store'
+import { global } from '../utils/store'
 import { consts } from '../utils/consts'
 import React from 'react'
 import { getClosestPoint } from './Points'
 
 export function Pieces() {
-    const store = useStore()
-
     return (
         <>
-            {store.pieces.map(piece => (
+            {global.store.pieces.map(piece => (
                 <circle
                     key={piece.id}
-                    cx={(piece.x - store.map.left) * consts.gridSize}
-                    cy={(piece.y - store.map.top) * consts.gridSize}
+                    cx={(piece.x - global.store.map.left) * consts.gridSize}
+                    cy={(piece.y - global.store.map.top) * consts.gridSize}
                     r={consts.gridSize / 3.5}
                     {...{ [consts.playerPieceAttributeName]: piece.id }}
                     style={style()}
@@ -106,8 +104,8 @@ const viewHandler = {
         if (svgRect === null) return null
         const xPerCent = (clientX - svgRect.left) / svgRect.width
         const yPerCent = (clientY - svgRect.top) / svgRect.height
-        const xPos = store.mapWidth * xPerCent + store.map.left
-        const yPos = store.mapHeight * yPerCent + store.map.top
+        const xPos = store.mapWidth() * xPerCent + store.map.left
+        const yPos = store.mapHeight() * yPerCent + store.map.top
         const xPosBounded = Math.max(store.map.left, Math.min(xPos, store.map.right))
         const yPosBounded = Math.max(store.map.top, Math.min(yPos, store.map.bottom))
         return { x: xPosBounded, y: yPosBounded }
