@@ -12,4 +12,5 @@ export const consts = {
     get pointSize() {
         return this.gridSize / 4
     },
+    pageNotFoundFontSize: 20,
 }

@@ -3,6 +3,8 @@ import { useStore } from '../utils/store'
 import Board from './Board'
 import { doc, getFirestore, getDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
+import { global } from '../utils/store'
+import { map1 } from '../maps/map1'
 
 function Game() {
     const store = useStore()
@@ -18,7 +20,8 @@ function Game() {
             setIsRoomValid(docSnap.exists())
             // Do smth with the user data here
         }
-        doesRoomExist()
+        doesRoomExist().catch(e => console.error(e))
+        global.store.map = map1
     }, [])
 
     return (
