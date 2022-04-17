@@ -3,12 +3,13 @@ import { consts } from '../utils/consts'
 import { Pieces } from './Pieces'
 import { Points } from './Points'
 import { Lines } from './Lines'
-import { useStore } from '../utils/store'
+import { global } from '../utils/store'
+import { PointText } from './PointText'
 
 function Board() {
-    const store = useStore()
-
-    const viewBox = `0 0 ${store.mapWidth * consts.gridSize} ${store.mapHeight * consts.gridSize}`
+    const viewWidth = global.store.mapWidth() * consts.gridSize
+    const viewHeight = global.store.mapHeight() * consts.gridSize
+    const viewBox = `0 0 ${viewWidth} ${viewHeight}`
 
     return (
         <div style={board()}>
@@ -16,14 +17,15 @@ function Board() {
                 <Lines />
                 <Points />
                 <Pieces />
+                <PointText />
             </svg>
         </div>
     )
 
     function board(): React.CSSProperties {
         return {
-            width: store.mapWidth * consts.gridSize,
-            height: store.mapHeight * consts.gridSize,
+            width: viewWidth,
+            height: viewHeight,
         }
     }
 

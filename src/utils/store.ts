@@ -11,10 +11,10 @@ const config = {
     pieces: <Piece[]>[{ id: 1, x: 1, y: 1 }],
     connectionError: '',
     map: map1,
-    get mapWidth() {
+    mapWidth() {
         return this.map.right - this.map.left
     },
-    get mapHeight() {
+    mapHeight() {
         return this.map.bottom - this.map.top
     },
 }

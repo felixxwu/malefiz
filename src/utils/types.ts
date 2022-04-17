@@ -25,6 +25,7 @@ export interface Point {
         y: number
     }
     neighbours: Id[]
+    text?: string
 }
 
 export interface Piece {
