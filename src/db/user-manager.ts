@@ -1,4 +1,4 @@
-import { global } from '../utils/store'
+import { store } from '../utils/store'
 import { useEffect } from 'react'
 import { addDoc, collection, doc, getFirestore, updateDoc, getDoc } from 'firebase/firestore'
 import { consts } from '../utils/consts'
@@ -19,7 +19,7 @@ export function initUser() {
                 // localStorageUserId can be null here, in which case a new user will be created
                 await createOrUpdateUser(userData)
             } catch (e) {
-                global.store.connectionError = `${e}`
+                store.state.connectionError = `${e}`
             }
         }
         init().catch(console.error)
@@ -62,8 +62,8 @@ async function createOrUpdateUser(userData: Partial<User>) {
     }
 
     // update store
-    global.store.userId = userId
-    if (userData.name !== undefined) global.store.userName = userData.name
+    store.state.userId = userId
+    if (userData.name !== undefined) store.state.userName = userData.name
 
     // update localstorage
     localStorage.setItem(consts.localStoreUserIdKey, userId)
@@ -81,7 +81,7 @@ const updateDocDebounced = debounce(500, async (id: string, userData: Partial<Us
 
 // user can be loaded with initUser()
 export function isUserLoaded() {
-    return global.store.userId !== ''
+    return store.state.userId !== ''
 }
 
 export const username = {
@@ -91,6 +91,6 @@ export const username = {
         await createOrUpdateUser(updateData)
     },
     get() {
-        return global.store.userName
+        return store.state.userName
     },
 }

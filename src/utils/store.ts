@@ -1,8 +1,8 @@
-import { defineStore } from 'minimal-react-state'
+import { defineStore } from 'truly-global-state'
 import { AppState, Piece } from './types'
 import { map1 } from '../maps/map1'
 
-const config = {
+export const store = defineStore({
     appWidth: window.innerWidth,
     appHeight: window.innerHeight,
     userId: '',
@@ -17,23 +17,4 @@ const config = {
     mapHeight() {
         return this.map.bottom - this.map.top
     },
-}
-
-export const useStore = defineStore(config)
-
-export function initStore() {
-    global.store = useStore()
-}
-
-export type storeType = typeof config
-
-export const global = {
-    storeValue: <storeType | null>null,
-    set store(value: storeType) {
-        this.storeValue = value
-    },
-    get store() {
-        if (this.storeValue === null) throw Error('Did not initialise global store before using it')
-        return this.storeValue
-    },
-}
+})

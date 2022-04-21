@@ -3,12 +3,12 @@ import { consts } from '../utils/consts'
 import { Pieces } from './Pieces'
 import { Points } from './Points'
 import { Lines } from './Lines'
-import { global } from '../utils/store'
+import { store } from '../utils/store'
 import { PointText } from './PointText'
 
 function Board() {
-    const viewWidth = global.store.mapWidth() * consts.gridSize
-    const viewHeight = global.store.mapHeight() * consts.gridSize
+    const viewWidth = store.state.mapWidth() * consts.gridSize
+    const viewHeight = store.state.mapHeight() * consts.gridSize
     const viewBox = `0 0 ${viewWidth} ${viewHeight}`
 
     return (

@@ -1,5 +1,5 @@
 import { generateCode } from '../db/generate-room-code'
-import { global } from '../utils/store'
+import { store } from '../utils/store'
 import Button from './Button'
 import { useNavigate } from 'react-router-dom'
 import React from 'react'
@@ -8,7 +8,7 @@ function CreateRoom() {
     const navigate = useNavigate()
 
     const handlePlayerNumberClick = async (numberOfPlayers: number) => {
-        const roomCode = await generateCode(global.store.userId, numberOfPlayers)
+        const roomCode = await generateCode(store.state.userId, numberOfPlayers)
         navigate(`/room/${roomCode}`, { replace: true })
     }
 

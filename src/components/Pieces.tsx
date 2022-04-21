@@ -1,4 +1,4 @@
-import { global } from '../utils/store'
+import { store } from '../utils/store'
 import { consts } from '../utils/consts'
 import React from 'react'
 import { getClosestPoint } from './Points'
@@ -6,11 +6,11 @@ import { getClosestPoint } from './Points'
 export function Pieces() {
     return (
         <>
-            {global.store.pieces.map(piece => (
+            {store.state.pieces.map(piece => (
                 <circle
                     key={piece.id}
-                    cx={(piece.x - global.store.map.left) * consts.gridSize}
-                    cy={(piece.y - global.store.map.top) * consts.gridSize}
+                    cx={(piece.x - store.state.map.left) * consts.gridSize}
+                    cy={(piece.y - store.state.map.top) * consts.gridSize}
                     r={consts.gridSize / 3.5}
                     {...{ [consts.playerPieceAttributeName]: piece.id }}
                     style={style()}
@@ -53,14 +53,14 @@ export function onPointerUp(event: React.PointerEvent) {
 }
 
 export function cancelPointerEvent() {
-    const draggingPiece = global.store.pieces.find(piece => piece.id === viewHandler.getPieceId())
+    const draggingPiece = store.state.pieces.find(piece => piece.id === viewHandler.getPieceId())
     if (draggingPiece === undefined) return
     viewHandler.movePiece(draggingPiece.x, draggingPiece.y, true)
     viewHandler.destroy()
 }
 
 function savePiecePosition(x: number, y: number) {
-    global.store.pieces = global.store.pieces.map(piece => {
+    store.state.pieces = store.state.pieces.map(piece => {
         return piece.id === viewHandler.getPieceId() ? { ...piece, x, y } : piece
     })
     viewHandler.movePiece(x, y, true)
@@ -75,8 +75,8 @@ const viewHandler = {
     movePiece(x: number, y: number, animated: boolean = false) {
         if (this.pieceElementToDrag === null) return null
         this.pieceElementToDrag.style.transition = animated ? '0.3s' : 'none'
-        const xPos = (x - global.store.map.left) * consts.gridSize
-        const yPos = (y - global.store.map.top) * consts.gridSize
+        const xPos = (x - store.state.map.left) * consts.gridSize
+        const yPos = (y - store.state.map.top) * consts.gridSize
         this.pieceElementToDrag.setAttribute('cx', `${xPos}`)
         this.pieceElementToDrag.setAttribute('cy', `${yPos}`)
     },
@@ -99,15 +99,14 @@ const viewHandler = {
         return pieceElement
     },
     getMapSpaceCoordinates(clientX: number, clientY: number) {
-        const store = global.store
         const svgRect = this.getSVGRect()
         if (svgRect === null) return null
         const xPerCent = (clientX - svgRect.left) / svgRect.width
         const yPerCent = (clientY - svgRect.top) / svgRect.height
-        const xPos = store.mapWidth() * xPerCent + store.map.left
-        const yPos = store.mapHeight() * yPerCent + store.map.top
-        const xPosBounded = Math.max(store.map.left, Math.min(xPos, store.map.right))
-        const yPosBounded = Math.max(store.map.top, Math.min(yPos, store.map.bottom))
+        const xPos = store.state.mapWidth() * xPerCent + store.state.map.left
+        const yPos = store.state.mapHeight() * yPerCent + store.state.map.top
+        const xPosBounded = Math.max(store.state.map.left, Math.min(xPos, store.state.map.right))
+        const yPosBounded = Math.max(store.state.map.top, Math.min(yPos, store.state.map.bottom))
         return { x: xPosBounded, y: yPosBounded }
     },
     getSVGRect() {

@@ -1,7 +1,7 @@
 import { consts } from '../utils/consts'
 import { uniqueId } from '../utils/uniqueId'
 import React from 'react'
-import { global } from '../utils/store'
+import { store } from '../utils/store'
 import { getSerialisedPoints } from './Points'
 
 export function PointText() {
@@ -12,8 +12,8 @@ export function PointText() {
         return (
             <tspan
                 key={uniqueId()}
-                x={(data.pos.x - global.store.map.left) * consts.gridSize}
-                y={(data.pos.y - global.store.map.top) * consts.gridSize + textYOffset}
+                x={(data.pos.x - store.state.map.left) * consts.gridSize}
+                y={(data.pos.y - store.state.map.top) * consts.gridSize + textYOffset}
                 fill={'white'}
                 fontSize={consts.pageNotFoundFontSize}
             >

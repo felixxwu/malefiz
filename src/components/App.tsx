@@ -1,5 +1,5 @@
 import { initUser, isUserLoaded } from '../db/user-manager'
-import { global, initStore } from '../utils/store'
+import { store } from '../utils/store'
 import React, { useEffect } from 'react'
 import Home from './Home'
 import Game from './Game'
@@ -9,14 +9,14 @@ import { Routes, Route } from 'react-router-dom'
 import PageNotFound from './PageNotFound'
 
 function App() {
-    initStore()
+    store.init()
     initUser()
 
     useEffect(() => {
         const resize = () => {
             // -1 because decimals can be rounded up, causing scrollbars to appear
-            global.store.appWidth = window.innerWidth - 1
-            global.store.appHeight = window.innerHeight - 1
+            store.state.appWidth = window.innerWidth - 1
+            store.state.appHeight = window.innerHeight - 1
         }
         window.onresize = resize
         resize()
@@ -33,10 +33,8 @@ function App() {
         >
             {(() => {
                 // TODO think of a way to clean this up
-                if (global.store.connectionError !== '') {
-                    return (
-                        <div>Could not connect to the server. {global.store.connectionError}</div>
-                    )
+                if (store.state.connectionError !== '') {
+                    return <div>Could not connect to the server. {store.state.connectionError}</div>
                 }
 
                 if (!isUserLoaded()) return <div>Loading...</div>
@@ -55,8 +53,8 @@ function App() {
 
     function app(): React.CSSProperties {
         return {
-            width: global.store.appWidth,
-            height: global.store.appHeight,
+            width: store.state.appWidth,
+            height: store.state.appHeight,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
