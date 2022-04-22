@@ -60,9 +60,10 @@ export function cancelPointerEvent() {
 }
 
 function savePiecePosition(x: number, y: number) {
-    store.state.pieces = store.state.pieces.map(piece => {
-        return piece.id === viewHandler.getPieceId() ? { ...piece, x, y } : piece
-    })
+    const piece = store.state.pieces.find(piece => piece.id === viewHandler.getPieceId())
+    if (!piece) return console.error('Piece', viewHandler.getPieceId(), 'not found')
+    piece.x = x
+    piece.y = y
     viewHandler.movePiece(x, y, true)
     viewHandler.destroy()
 }
