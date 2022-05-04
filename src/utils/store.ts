@@ -1,8 +1,8 @@
-import { defineStore } from 'truly-global-state'
+import { createStore } from 'truly-global-state'
 import { AppState, Piece } from './types'
 import { map1 } from '../maps/map1'
 
-export const store = defineStore({
+export const store = createStore({
     appWidth: window.innerWidth,
     appHeight: window.innerHeight,
     userId: '',

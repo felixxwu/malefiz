@@ -17,7 +17,7 @@
     "react-router-dom": "^6.3.0",
     "styled-components": "^5.3.5",
     "throttle-debounce": "^3.0.1",
-    "truly-global-state": "^1.0.4"
+    "truly-global-state": "^1.0.5"
   },
   "devDependencies": {
     "@types/chance": "^1.1.3",

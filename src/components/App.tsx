@@ -9,7 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import PageNotFound from './PageNotFound'
 
 function App() {
-    store.init()
+    store.subscribeToAll()
     initUser()
 
     useEffect(() => {
